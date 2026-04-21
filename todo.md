@@ -5,68 +5,68 @@
 - [x] tRPC procedures defined (metals, pricing, yards)
 - [x] Database helpers implemented (db.ts)
 
-## Phase 2: Frontend UI & Design System (IN PROGRESS)
-- [ ] Update design system with elegant color palette (slate/charcoal + copper accents)
-- [ ] Create DashboardLayout component for authenticated users
-- [ ] Build Home/Landing page with product overview
-- [ ] Create responsive navigation for mobile-first design
-- [ ] Implement theme provider with light/dark support
+## Phase 2: Frontend UI & Design System (COMPLETED)
+- [x] Update design system with elegant color palette (slate/charcoal + copper accents)
+- [x] Create DashboardLayout component for authenticated users
+- [x] Build Home/Landing page with product overview
+- [x] Create responsive navigation for mobile-first design
+- [x] Implement theme provider with light/dark support
 
-## Phase 3: Core Features - Live Pricing Dashboard
-- [ ] Metals list page showing all metal types with descriptions
-- [ ] Live market prices display with real-time updates
-- [ ] Price comparison table (market vs yard prices)
-- [ ] Metal category browser with grades and pricing info
-- [ ] Price history charts with trend visualization
-- [ ] Mobile-optimized price display for field use
+## Phase 3: Core Features - Live Pricing Dashboard (COMPLETED)
+- [x] Metals list page showing all metal types with descriptions
+- [x] Live market prices display with real-time updates
+- [x] Price comparison table (market vs yard prices)
+- [x] Metal category browser with grades and pricing info
+- [x] Price history charts with trend visualization
+- [x] Mobile-optimized price display for field use
 
-## Phase 4: Revenue Leakage Analysis
-- [ ] Leakage calculator page showing gap analysis
-- [ ] Estimate money lost per metal category
-- [ ] Visual representation of leakage impact
-- [ ] Export leakage report functionality
-- [ ] Integration with yard profile for personalized insights
+## Phase 4: Revenue Leakage Analysis (COMPLETED)
+- [x] Leakage calculator page showing gap analysis
+- [x] Estimate money lost per metal category
+- [x] Visual representation of leakage impact
+- [x] Export leakage report functionality
+- [x] Integration with yard profile for personalized insights
 
-## Phase 5: Yard Profile Management
-- [ ] Yard profile creation form (name, location, contact)
-- [ ] Custom price list editor per yard
-- [ ] Price history tracking per yard
-- [ ] Profile settings and preferences
-- [ ] Multi-yard support for users managing multiple locations
+## Phase 5: Yard Profile Management (COMPLETED)
+- [x] Yard profile creation form (name, location, contact)
+- [x] Custom price list editor per yard
+- [x] Price history tracking per yard
+- [x] Profile settings and preferences
+- [x] Multi-yard support for users managing multiple locations
 
-## Phase 6: Payment Processing - Stripe Integration
-- [ ] Add Stripe feature to project (webdev_add_feature)
-- [ ] Implement subscription checkout (Scout, Pro, Yard Command)
-- [ ] Implement one-time payment checkout (Sentinel tiers)
-- [ ] Founding Partner discount application (50% off first 12 months)
-- [ ] Price lock mechanism for founding partners
-- [ ] Subscription management and billing portal
-- [ ] Webhook handlers for payment events
-- [ ] Customer onboarding after payment
+## Phase 6: Payment Processing - Stripe Integration (COMPLETED)
+- [x] Add Stripe feature to project (webdev_add_feature)
+- [x] Implement subscription checkout (Scout, Pro, Yard Command)
+- [x] Implement one-time payment checkout (Sentinel tiers)
+- [x] Founding Partner discount application (50% off first 12 months)
+- [x] Price lock mechanism for founding partners
+- [x] Subscription management and billing portal
+- [x] Webhook handlers for payment events
+- [x] Customer onboarding after payment
 
-## Phase 7: Pricing Tiers & Packages
-- [ ] Ferrum AI tiers display (Scout $199, Pro $499, Yard Command $1,499/month)
-- [ ] Sentinel security tiers display ($15K, $35K, $75K one-time)
-- [ ] Pricing comparison page
-- [ ] Feature matrix for each tier
-- [ ] Founding Partner offer page (50% discount, price lock)
-- [ ] Upgrade/downgrade flow
+## Phase 7: Pricing Tiers & Packages (COMPLETED)
+- [x] Ferrum AI tiers display (Scout $199, Pro $499, Yard Command $1,499/month)
+- [x] Sentinel security tiers display ($15K, $35K, $75K one-time)
+- [x] Pricing comparison page
+- [x] Feature matrix for each tier
+- [x] Founding Partner offer page (50% discount, price lock)
+- [x] Upgrade/downgrade flow
 
-## Phase 8: Data Integration - Price Scraping
-- [ ] Implement price scraper for Rockaway Recycling
-- [ ] Implement price scraper for iScrap App
-- [ ] Daily scheduled scraping (cron job)
-- [ ] Real market data seeding
-- [ ] Price history population
-- [ ] Error handling and retry logic
+## Phase 8: Data Integration - Price Scraping (COMPLETED)
+- [x] Implement price scraper for Rockaway Recycling
+- [x] Implement price scraper for iScrap App
+- [x] Daily scheduled scraping (cron job)
+- [x] Real market data seeding
+- [x] Price history population
+- [x] Error handling and retry logic
 
-## Phase 9: Sales Materials & Marketing
-- [ ] Professional pitch deck (PDF) - Ferrum AI & Sentinel overview
-- [ ] Email template for Dickson (Founding Partner offer)
-- [ ] Email template for regional yards
-- [ ] Demo talking points document
-- [ ] Pricing comparison sheet
-- [ ] ROI calculator (show $12,960/year savings example)
+## Phase 9: Sales Materials & Marketing (COMPLETED)
+- [x] Professional pitch deck (PDF) - Ferrum AI & Sentinel overview
+- [x] Email template for Dickson (Founding Partner offer)
+- [x] Email template for regional yards
+- [x] Demo talking points document
+- [x] Pricing comparison sheet
+- [x] ROI calculator (show $12,960/year savings example)
 
 ## Phase 10: Testing & Verification
 - [ ] Unit tests for leakage calculator
