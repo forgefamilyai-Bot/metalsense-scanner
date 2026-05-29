@@ -105,3 +105,14 @@
 - Mobile-first design critical for field use
 - Real market data essential for credibility
 - Sales execution is the revenue driver, not feature polish
+
+
+## COMPLETED: Price Sheet Upload Feature
+- [x] Database schema (priceSheets + sheetPrices tables)
+- [x] tRPC procedures (upload, list, compare, latest)
+- [x] CSV parser with metal matching
+- [x] Price comparison with market rates
+- [x] Upload history and versioning
+- [x] Comparison report generation
+- [x] Frontend UI component at /upload-price-sheet
+- [x] Revenue gap calculation (per lb + monthly estimate)

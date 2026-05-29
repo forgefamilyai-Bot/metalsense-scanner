@@ -1,6 +1,6 @@
 import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, metals, marketPrices, priceHistory, yards, yardPrices, usersStripe } from "../drizzle/schema";
+import { InsertUser, users, metals, marketPrices, priceHistory, yards, yardPrices, usersStripe, priceSheets, sheetPrices } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -353,4 +353,133 @@ export async function updateUserSubscription(
       priceLockedAt: foundingPartner ? new Date() : undefined,
     })
     .where(eq(usersStripe.userId, userId));
+}
+
+
+/**
+ * PRICE SHEETS - Create a new price sheet upload record
+ */
+export async function createPriceSheet(yardId: number, fileName: string, fileSize: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.insert(priceSheets).values({
+    yardId,
+    fileName,
+    fileSize,
+    status: "pending",
+  });
+  
+  return result;
+}
+
+/**
+ * PRICE SHEETS - Get all price sheets for a yard
+ */
+export async function getYardPriceSheets(yardId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select()
+    .from(priceSheets)
+    .where(eq(priceSheets.yardId, yardId))
+    .orderBy(desc(priceSheets.uploadedAt));
+}
+
+/**
+ * PRICE SHEETS - Get latest price sheet for a yard
+ */
+export async function getLatestPriceSheet(yardId: number) {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const result = await db.select()
+    .from(priceSheets)
+    .where(eq(priceSheets.yardId, yardId))
+    .orderBy(desc(priceSheets.uploadedAt))
+    .limit(1);
+  
+  return result.length > 0 ? result[0] : null;
+}
+
+/**
+ * SHEET PRICES - Insert prices from uploaded sheet
+ */
+export async function insertSheetPrices(sheetId: number, prices: Array<{ metalId: number; priceUsd: number; metalName?: string }>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const values = prices.map(p => ({
+    sheetId,
+    metalId: p.metalId,
+    priceUsd: p.priceUsd.toString(),
+    metalName: p.metalName,
+  }));
+  
+  await db.insert(sheetPrices).values(values);
+}
+
+/**
+ * SHEET PRICES - Get all prices from a sheet
+ */
+export async function getSheetPrices(sheetId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select()
+    .from(sheetPrices)
+    .where(eq(sheetPrices.sheetId, sheetId));
+}
+
+/**
+ * SHEET PRICES - Compare sheet prices with market prices
+ */
+export async function compareSheetWithMarket(sheetId: number) {
+  const db = await getDb();
+  if (!db) return { comparison: [], totalGap: 0 };
+  
+  const sheetPricesList = await getSheetPrices(sheetId);
+  const marketPricesList = await getLatestMarketPrices();
+  
+  const comparison = [];
+  let totalGap = 0;
+  
+  for (const sp of sheetPricesList) {
+    const mp = marketPricesList.find(p => p.metalId === sp.metalId);
+    if (mp && mp.priceUsd && sp.priceUsd) {
+      const sheetPrice = Number(sp.priceUsd);
+      const marketPrice = Number(mp.priceUsd);
+      const gap = marketPrice - sheetPrice;
+      
+      comparison.push({
+        metalId: sp.metalId,
+        metalName: sp.metalName,
+        sheetPrice,
+        marketPrice,
+        gap,
+        gapPercent: ((gap / marketPrice) * 100).toFixed(2),
+        status: gap > 0 ? "below_market" : gap < 0 ? "above_market" : "at_market",
+      });
+      
+      totalGap += gap;
+    }
+  }
+  
+  return { comparison, totalGap };
+}
+
+/**
+ * PRICE SHEETS - Update sheet status after parsing
+ */
+export async function updatePriceSheetStatus(sheetId: number, status: "pending" | "parsed" | "error", errorMessage?: string, parsedMetals?: number) {
+  const db = await getDb();
+  if (!db) return;
+  
+  await db.update(priceSheets)
+    .set({
+      status,
+      errorMessage,
+      parsedMetals,
+    })
+    .where(eq(priceSheets.id, sheetId));
 }

@@ -124,3 +124,41 @@ export const yardPrices = mysqlTable("yard_prices", {
 
 export type YardPrice = typeof yardPrices.$inferSelect;
 export type InsertYardPrice = typeof yardPrices.$inferInsert;
+
+
+/**
+ * Uploaded price sheets from users
+ */
+export const priceSheets = mysqlTable("price_sheets", {
+  id: int("id").autoincrement().primaryKey(),
+  yardId: int("yardId").notNull().references(() => yards.id),
+  fileName: varchar("fileName", { length: 255 }).notNull(),
+  fileSize: int("fileSize"),
+  uploadedAt: timestamp("uploadedAt").defaultNow(),
+  parsedMetals: int("parsedMetals"),
+  status: mysqlEnum("status", ["pending", "parsed", "error"]).default("pending"),
+  errorMessage: text("errorMessage"),
+}, (table) => ({
+  yardIdIdx: index("yardId_idx").on(table.yardId),
+}));
+
+export type PriceSheet = typeof priceSheets.$inferSelect;
+export type InsertPriceSheet = typeof priceSheets.$inferInsert;
+
+/**
+ * Individual prices from uploaded sheets
+ */
+export const sheetPrices = mysqlTable("sheet_prices", {
+  id: int("id").autoincrement().primaryKey(),
+  sheetId: int("sheetId").notNull().references(() => priceSheets.id),
+  metalId: int("metalId").notNull().references(() => metals.id),
+  priceUsd: decimal("priceUsd", { precision: 10, scale: 4 }),
+  metalName: varchar("metalName", { length: 100 }),
+  createdAt: timestamp("createdAt").defaultNow(),
+}, (table) => ({
+  sheetIdIdx: index("sheetId_idx").on(table.sheetId),
+  metalIdIdx: index("metalId_idx").on(table.metalId),
+}));
+
+export type SheetPrice = typeof sheetPrices.$inferSelect;
+export type InsertSheetPrice = typeof sheetPrices.$inferInsert;

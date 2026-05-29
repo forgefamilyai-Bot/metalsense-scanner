@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Pricing from "./pages/Pricing";
 import FoundingPartner from "./pages/FoundingPartner";
+import PriceSheetUpload from "./pages/PriceSheetUpload";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -17,6 +18,7 @@ function Router() {
       <Route path={"/dashboard"} component={Dashboard} />
       <Route path={"/pricing"} component={Pricing} />
       <Route path={"/founding-partner"} component={FoundingPartner} />
+      <Route path={"/upload-price-sheet"} component={PriceSheetUpload} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

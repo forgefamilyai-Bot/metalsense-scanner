@@ -18,6 +18,13 @@ import {
   getOrCreateUserStripe,
   updateUserStripeCustomer,
   updateUserSubscription,
+  createPriceSheet,
+  getYardPriceSheets,
+  getLatestPriceSheet,
+  insertSheetPrices,
+  getSheetPrices,
+  compareSheetWithMarket,
+  updatePriceSheetStatus,
 } from "./db";
 import Stripe from "stripe";
 type StripeClient = InstanceType<typeof Stripe>;
@@ -267,6 +274,85 @@ export const appRouter = router({
         throw new Error("Failed to cancel subscription");
       }
     }),
+  }),
+
+  /**
+   * PRICE SHEETS - Upload and parse price sheets
+   */
+  priceSheets: router({
+    upload: protectedProcedure
+      .input(z.object({
+        yardId: z.number(),
+        fileName: z.string(),
+        fileSize: z.number(),
+        csvData: z.string(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        try {
+          // Create price sheet record
+          const sheet = await createPriceSheet(input.yardId, input.fileName, input.fileSize);
+          const sheetId = (sheet as any).insertId || 0;
+
+          // Parse CSV data
+          const lines = input.csvData.trim().split('\n');
+          const metals = await getAllMetals();
+          const prices: Array<{ metalId: number; priceUsd: number; metalName?: string }> = [];
+
+          // Skip header row
+          for (let i = 1; i < lines.length; i++) {
+            const [metalName, priceStr] = lines[i].split(',').map(s => s.trim());
+            if (!metalName || !priceStr) continue;
+
+            // Find matching metal
+            const metal = metals.find(m => 
+              m.name.toLowerCase().includes(metalName.toLowerCase())
+            );
+
+            if (metal && !isNaN(parseFloat(priceStr))) {
+              prices.push({
+                metalId: metal.id,
+                priceUsd: parseFloat(priceStr),
+                metalName,
+              });
+            }
+          }
+
+          if (prices.length === 0) {
+            await updatePriceSheetStatus(sheetId, "error", "No valid prices found in CSV");
+            throw new Error("No valid prices found in CSV");
+          }
+
+          // Insert prices
+          await insertSheetPrices(sheetId, prices);
+          await updatePriceSheetStatus(sheetId, "parsed", undefined, prices.length);
+
+          return { success: true, sheetId, parsedMetals: prices.length };
+        } catch (error) {
+          console.error("Price sheet upload error:", error);
+          throw new Error("Failed to upload price sheet");
+        }
+      }),
+
+    list: protectedProcedure
+      .input(z.object({ yardId: z.number() }))
+      .query(async ({ input }) => {
+        return getYardPriceSheets(input.yardId);
+      }),
+
+    compare: protectedProcedure
+      .input(z.object({ sheetId: z.number() }))
+      .query(async ({ input }) => {
+        return compareSheetWithMarket(input.sheetId);
+      }),
+
+    latest: protectedProcedure
+      .input(z.object({ yardId: z.number() }))
+      .query(async ({ input }) => {
+        const sheet = await getLatestPriceSheet(input.yardId);
+        if (!sheet) return null;
+        const comparison = await compareSheetWithMarket(sheet.id);
+        return { ...sheet, comparison };
+      }),
   }),
 });
 
