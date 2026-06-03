@@ -26,7 +26,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
       {/* Navigation */}
       <nav className="border-b border-slate-700/50 bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
             Ferrum AI
           </div>
@@ -37,10 +37,10 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-4 py-20">
+        <div className="grid grid-cols-1 gap-12 items-center">
           <div>
-            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
               Real-Time Scrap Metal Intelligence
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed">
@@ -83,9 +83,9 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-slate-700/50">
+      <section className="max-w-7xl mx-auto px-4 py-20 border-t border-slate-700/50">
         <h2 className="text-4xl font-bold text-white mb-12 text-center">Powerful Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           <Card className="bg-slate-800/50 border-slate-700 hover:border-amber-500/50 transition">
             <CardHeader>
               <div className="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mb-4">
@@ -125,9 +125,9 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-slate-700/50">
+      <section className="max-w-7xl mx-auto px-4 py-20 border-t border-slate-700/50">
         <h2 className="text-4xl font-bold text-white mb-12 text-center">Simple, Transparent Pricing</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           {[
             {
               name: "Scout",
@@ -192,7 +192,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-slate-700/50 text-center">
+      <section className="max-w-7xl mx-auto px-4 py-20 border-t border-slate-700/50 text-center">
         <h2 className="text-4xl font-bold text-white mb-6">Ready to maximize your margins?</h2>
         <p className="text-xl text-slate-300 mb-8">
           Join leading scrap yards using Ferrum AI to stay competitive and grow revenue.
@@ -206,7 +206,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-slate-700/50 bg-slate-900/50 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400">
+        <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
           <p>&copy; 2026 Ferrum AI. All rights reserved. | Potent~Flow AI Tech</p>
         </div>
       </footer>

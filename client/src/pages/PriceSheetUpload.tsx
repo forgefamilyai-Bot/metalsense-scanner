@@ -70,7 +70,7 @@ export default function PriceSheetUpload() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
+    <div className="min-h-screen bg-background p-4">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header */}
         <div>
@@ -86,7 +86,7 @@ export default function PriceSheetUpload() {
             <CardTitle>Select Your Yard</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3">
               {yards?.map((yard) => (
                 <button
                   key={yard.id}

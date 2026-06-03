@@ -49,7 +49,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
       {/* Header */}
       <div className="border-b border-slate-700/50 bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold text-white">Ferrum AI Dashboard</h1>
             <p className="text-sm text-slate-400">{user?.name || "Yard Operator"}</p>
@@ -60,7 +60,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Yard Selection */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
@@ -110,7 +110,7 @@ export default function Dashboard() {
             </Dialog>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             {yards?.map((yard) => (
               <Card
                 key={yard.id}
@@ -135,7 +135,7 @@ export default function Dashboard() {
             {/* Live Prices */}
             <div>
               <h2 className="text-2xl font-bold text-white mb-4">Live Market Prices</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 {prices?.map((price) => {
                   const metal = metals?.find((m) => m.id === price.metalId);
                   const leakageItem = leakage?.byMetal.find((l) => l.metalId === price.metalId);

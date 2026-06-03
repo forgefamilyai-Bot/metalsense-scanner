@@ -18,7 +18,7 @@ export default function FoundingPartner() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
       {/* Navigation */}
       <nav className="border-b border-slate-700/50 bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
             Ferrum AI
           </div>
@@ -29,7 +29,7 @@ export default function FoundingPartner() {
       </nav>
 
       {/* Hero Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section className="max-w-4xl mx-auto px-4 py-20">
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
             <div className="flex items-center gap-2 bg-amber-500/20 border border-amber-500/50 rounded-full px-4 py-2">
@@ -37,7 +37,7 @@ export default function FoundingPartner() {
               <span className="text-sm font-semibold text-amber-400">Founding Partner Program</span>
             </div>
           </div>
-          <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
             Lock In Your Price. Forever.
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
@@ -46,7 +46,7 @@ export default function FoundingPartner() {
         </div>
 
         {/* Offer Details */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 gap-6 mb-12">
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <div className="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mb-4">
@@ -135,7 +135,7 @@ export default function FoundingPartner() {
             <CardTitle className="text-white">What You Get</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
               {[
                 "Live market prices (updated daily)",
                 "Revenue leakage calculator",
@@ -193,7 +193,7 @@ export default function FoundingPartner() {
 
       {/* Footer */}
       <footer className="border-t border-slate-700/50 bg-slate-900/50 py-12 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400">
+        <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
           <p>&copy; 2026 Ferrum AI. All rights reserved. | Potent~Flow AI Tech</p>
         </div>
       </footer>
