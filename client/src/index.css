@@ -96,19 +96,24 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--background);
+    color: var(--foreground);
   }
 
   .container {
-    @apply mx-auto px-4;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
     max-width: 80rem;
   }
 
   .flex {
-    @apply min-h-0 min-w-0;
+    min-height: 0;
+    min-width: 0;
   }
 
   button[variant="outline"] {
-    @apply bg-transparent;
+    background-color: transparent;
   }
 }
